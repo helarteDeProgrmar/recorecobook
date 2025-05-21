@@ -45,7 +45,6 @@ public class RecommenderAgent extends Agent {
                     Object[] content = (Object[]) msg.getContentObject();
                     userPreferences = (Map<String, Integer>) content[0];
                     String author = (String) content[1];
-                    System.out.println("** RecomenderAgent | el author es:" + author);
                     visualizerAID = msg.getSender().getLocalName();
 
                     // Send author to IngestorAgent

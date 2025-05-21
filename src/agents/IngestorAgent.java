@@ -26,13 +26,8 @@ public class IngestorAgent extends Agent {
                 if (msg != null) {
                     try {
                         String author = (String) msg.getContent();
-                        System.out.println("** IngestorAgent | el autor es: " + author);
 
                         List<Book> books = api.searchBooksByAuthor(author);
-                        for (Book book : books) {
-                            System.out.println(book.toString());
-                            System.out.println("One book more!");
-                        }
 
                         ACLMessage reply = msg.createReply();
                         reply.setPerformative(ACLMessage.INFORM);

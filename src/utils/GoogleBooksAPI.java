@@ -68,6 +68,7 @@ public class GoogleBooksAPI {
                             if (categoriesJSON != null) {
                                 for (int j = 0; j < categoriesJSON.length(); j++) {
                                     String rawCategory = categoriesJSON.getString(j);
+                                    System.out.println("## GoogleBooksAPI | categoria: " + rawCategory);
                                     String translated = translateCategory(rawCategory);
                                     if (translated != null) {
                                         mappedCategories.add(translated);
