@@ -1,0 +1,6 @@
+# java
+*.jar
+*.class
+
+# pesados
+*.txt
