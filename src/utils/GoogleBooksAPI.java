@@ -127,7 +127,7 @@ public class GoogleBooksAPI {
 
         Map<String, Integer> features = new HashMap<>();
         for (String genre : allGenres) {
-            features.put(genre, mappedCategories.contains(genre) ? 10 : 0);
+            features.put(genre, mappedCategories.contains(genre) ? 10 : 1);
         }
 
         return features;
