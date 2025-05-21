@@ -24,7 +24,7 @@ public class VisualizerAgent extends Agent {
 
                 // Genres to rate
                 String[] genres = {
-                        "action", "fantasy", "romance", "horror", "sci_fi", "drama", "comedy"
+                        "action", "fantasy", "romance", "horror", "science_fiction", "drama", "comedy"
                 };
 
                 Map<String, Integer> preferences = new HashMap<>();

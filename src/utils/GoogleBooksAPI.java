@@ -66,9 +66,9 @@ public class GoogleBooksAPI {
                             List<String> mappedCategories = new ArrayList<>();
                             JSONArray categoriesJSON = info.optJSONArray("categories");
                             if (categoriesJSON != null) {
+                                System.out.println("## GoogleBooksAPI | categoria: " + categoriesJSON.toString());
                                 for (int j = 0; j < categoriesJSON.length(); j++) {
                                     String rawCategory = categoriesJSON.getString(j);
-                                    System.out.println("## GoogleBooksAPI | categoria: " + rawCategory);
                                     String translated = translateCategory(rawCategory);
                                     if (translated != null) {
                                         mappedCategories.add(translated);
@@ -120,16 +120,69 @@ public class GoogleBooksAPI {
         return null;
     }
 
-    private Map<String, Integer> normalizeCategories(List<String> mappedCategories) {
+    private Map<String, Integer> normalizeCategories(List<String> inputCategories) {
         List<String> allGenres = Arrays.asList(
-                "accion", "fantasia", "romance", "terror",
-                "ciencia ficcion", "drama", "comedia");
+                "action", "fantasy", "romance", "horror",
+                "science_fiction", "drama", "comedy");
 
-        Map<String, Integer> features = new HashMap<>();
+        Map<String, Map<String, Integer>> similarityTable = new HashMap<>();
+
+        similarityTable.put("action", Map.of(
+                "action", 10, "fantasy", 4, "romance", 3, "horror", 5,
+                "science_fiction", 5, "drama", 4, "comedy", 2));
+
+        similarityTable.put("fantasy", Map.of(
+                "action", 4, "fantasy", 10, "romance", 2, "horror", 1,
+                "science_fiction", 7, "drama", 2, "comedy", 1));
+
+        similarityTable.put("romance", Map.of(
+                "action", 2, "fantasy", 3, "romance", 10, "horror", 1,
+                "science_fiction", 2, "drama", 8, "comedy", 2));
+
+        similarityTable.put("horror", Map.of(
+                "action", 4, "fantasy", 3, "romance", 1, "horror", 10,
+                "science_fiction", 6, "drama", 4, "comedy", 1));
+
+        similarityTable.put("science_fiction", Map.of(
+                "action", 6, "fantasy", 7, "romance", 2, "horror", 5,
+                "science_fiction", 10, "drama", 3, "comedy", 1));
+
+        similarityTable.put("drama", Map.of(
+                "action", 3, "fantasy", 2, "romance", 6, "horror", 2,
+                "science_fiction", 3, "drama", 10, "comedy", 4));
+
+        similarityTable.put("comedy", Map.of(
+                "action", 2, "fantasy", 1, "romance", 5, "horror", 1,
+                "science_fiction", 2, "drama", 4, "comedy", 10));
+
+        similarityTable.put("fiction", Map.of(
+                "action", 6, "fantasy", 5, "romance", 3, "horror", 1,
+                "science_fiction", 9, "drama", 4, "comedy", 1));
+
+        similarityTable.put("mystery", Map.of(
+                "action", 5, "fantasy", 2, "romance", 4, "horror", 6,
+                "science_fiction", 2, "drama", 4, "comedy", 1));
+
+        similarityTable.put("thriller", Map.of(
+                "action", 5, "fantasy", 1, "romance", 4, "horror", 5,
+                "science_fiction", 2, "drama", 4, "comedy", 1));
+
+        Map<String, Integer> result = new HashMap<>();
         for (String genre : allGenres) {
-            features.put(genre, mappedCategories.contains(genre) ? 10 : 1);
+            result.put(genre, 1);
         }
 
-        return features;
+        for (String input : inputCategories) {
+            Map<String, Integer> influence = similarityTable.get(input);
+            if (influence != null) {
+                for (String genre : allGenres) {
+                    int current = result.get(genre);
+                    int incoming = influence.getOrDefault(genre, 1);
+                    result.put(genre, Math.max(current, incoming));
+                }
+            }
+        }
+
+        return result;
     }
 }
