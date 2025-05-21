@@ -62,9 +62,10 @@ This will compile and launch the system.
 
 ## 🔮 Future Improvements
 
-* Integrate real Google Books API responses.
 * Improve similarity heuristics (e.g., cosine similarity, machine learning).
+* Permitir al usuario elegir las recomendaciones.
 * GUI interface for user interaction.
+* Permitir varios autores.
 
 ---
 Happy hacking 📚🤖
