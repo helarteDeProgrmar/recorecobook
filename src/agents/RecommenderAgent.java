@@ -44,13 +44,13 @@ public class RecommenderAgent extends Agent {
                 try {
                     Object[] content = (Object[]) msg.getContentObject();
                     userPreferences = (Map<String, Integer>) content[0];
-                    String author = (String) content[1];
+                    List<String> authors = (List<String>) content[1];
                     visualizerAID = msg.getSender().getLocalName();
 
                     // Send author to IngestorAgent
                     ACLMessage toIngestor = new ACLMessage(ACLMessage.REQUEST);
                     toIngestor.addReceiver(new AID("ingestor", AID.ISLOCALNAME));
-                    toIngestor.setContent(author);
+                    toIngestor.setContent(authors.get(0));
                     send(toIngestor);
 
                     System.out.println("Received user preferences and author. Request sent to IngestorAgent.");

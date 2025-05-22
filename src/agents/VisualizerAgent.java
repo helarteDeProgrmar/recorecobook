@@ -55,7 +55,7 @@ public class VisualizerAgent extends Agent {
                 ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                 msg.addReceiver(new AID("recommender", AID.ISLOCALNAME));
                 try {
-                    msg.setContentObject(new Object[] { preferences, authors.get(0) });
+                    msg.setContentObject(new Object[] { preferences, authors });
                     send(msg);
                     System.out.println("Preferences and author sent to recommender.");
                 } catch (IOException e) {
