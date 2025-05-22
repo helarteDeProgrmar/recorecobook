@@ -89,8 +89,13 @@ public class VisualizerAgent extends Agent {
                     } catch (UnreadableException e) {
                         e.printStackTrace();
                     }
-                } else {
-                    block();
+                }
+
+                System.out.println("More queries? (y/n)");
+                String resp = scanner.nextLine().trim().toLowerCase();
+                if (resp.equals("n") || resp.equals("no")) {
+                    System.out.println("Closing system");
+                    System.exit(0);
                 }
             }
         }, "PRINT_RESULTS");
