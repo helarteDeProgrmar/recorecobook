@@ -37,6 +37,15 @@ later be integrated with Google Books API).
 
 ## 🚀 How to Run
 
+### Dependencies
+
+Install the json library and the jade library:
+[jade.jar](https://jade.tilab.com/download/jade/license/jade-download/)
+[json-*.jar](https://github.com/stleary/JSON-java)
+Put it in the `lib/`
+
+### Run
+
 1. Make sure you have Java 11+ installed.
 2. Place `jade.jar` and `json-*.jar` in the `lib/` directory.
 3. Use the provided script:
