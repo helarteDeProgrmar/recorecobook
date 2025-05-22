@@ -10,6 +10,7 @@ import jade.core.behaviours.CyclicBehaviour;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import models.Book;
 
@@ -45,13 +46,16 @@ public class VisualizerAgent extends Agent {
                 }
 
                 System.out.print("Enter an author to search: ");
-                String author = scanner.nextLine();
+                String string_authors = scanner.nextLine();
 
+                List<String> authors = Arrays.stream(string_authors.split(";")).map(String::trim)
+                        .collect(Collectors.toList());
+                System.out.println(authors.toString());
                 // Send data to RecommenderAgent
                 ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                 msg.addReceiver(new AID("recommender", AID.ISLOCALNAME));
                 try {
-                    msg.setContentObject(new Object[] { preferences, author });
+                    msg.setContentObject(new Object[] { preferences, authors.get(0) });
                     send(msg);
                     System.out.println("Preferences and author sent to recommender.");
                 } catch (IOException e) {
