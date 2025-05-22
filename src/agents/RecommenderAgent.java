@@ -50,7 +50,8 @@ public class RecommenderAgent extends Agent {
                     // Send author to IngestorAgent
                     ACLMessage toIngestor = new ACLMessage(ACLMessage.REQUEST);
                     toIngestor.addReceiver(new AID("ingestor", AID.ISLOCALNAME));
-                    toIngestor.setContent(authors.get(0));
+                    toIngestor.setContentObject(new Object[] { authors });
+                    System.out.println(authors.toString());
                     send(toIngestor);
 
                     System.out.println("Received user preferences and author. Request sent to IngestorAgent.");

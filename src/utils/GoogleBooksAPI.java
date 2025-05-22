@@ -22,7 +22,7 @@ public class GoogleBooksAPI {
         return fetchBooks(Collections.singletonList(author));
     }
 
-    private List<Book> fetchBooks(List<String> authors) {
+    public List<Book> fetchBooks(List<String> authors) {
         List<Book> books = new ArrayList<>();
 
         for (String author : authors) {

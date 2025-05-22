@@ -25,9 +25,11 @@ public class IngestorAgent extends Agent {
                 ACLMessage msg = myAgent.receive();
                 if (msg != null) {
                     try {
-                        String author = (String) msg.getContent();
+                        Object[] container = (Object[]) msg.getContentObject();
+                        List<String> authors = (List<String>) container[0];
+                        System.out.println(authors.toString());
 
-                        List<Book> books = api.searchBooksByAuthor(author);
+                        List<Book> books = api.fetchBooks(authors);
 
                         ACLMessage reply = msg.createReply();
                         reply.setPerformative(ACLMessage.INFORM);
@@ -35,7 +37,7 @@ public class IngestorAgent extends Agent {
 
                         myAgent.send(reply);
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {
