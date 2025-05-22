@@ -11,8 +11,7 @@ The system consists of three agents:
 and selected author.
 - **RecommenderAgent**: Receives user preferences, communicates with the Ingestor
 to fetch books, applies a similarity heuristic, and sends back top recommendations.
-- **IngestorAgent**: Mock agent that simulates book retrieval by author (can
-later be integrated with Google Books API).
+- **IngestorAgent**: Agent that take books written by an author with Google Books API.
 
 ## 📁 Project Structure
 
@@ -59,7 +58,7 @@ This will compile and launch the system.
 ## 🧪 Features
 
 * Collects user preferences on genres via console.
-* Fetches books (mocked or real) for a given author.
+* Fetches books for a given author.
 * Applies a simple heuristic to recommend top 5 most relevant books.
 * Uses JADE for agent communication and behavior control.
 
@@ -72,7 +71,7 @@ This will compile and launch the system.
 ## 🔮 Future Improvements
 
 * Improve similarity heuristics (e.g., cosine similarity, machine learning).
-* Has a cycle interface
+* Can stop if you want.
 * GUI interface for user interaction.
 * Make an agent more to transform better the data.
 
