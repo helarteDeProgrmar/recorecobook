@@ -2,11 +2,12 @@ package agents;
 
 import jade.core.Agent;
 import jade.core.AID;
+import jade.core.behaviours.FSMBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import jade.lang.acl.MessageTemplate;
 import jade.core.behaviours.OneShotBehaviour;
-import jade.core.behaviours.CyclicBehaviour;
+// import jade.core.behaviours.CyclicBehaviour;
 
 import java.io.IOException;
 import java.util.*;
@@ -18,10 +19,11 @@ public class VisualizerAgent extends Agent {
 
     protected void setup() {
         System.out.println("VisualizerAgent started.");
+        Scanner scanner = new Scanner(System.in);
+        FSMBehaviour fsm = new FSMBehaviour(this);
 
-        addBehaviour(new OneShotBehaviour() {
+        fsm.registerFirstState(new OneShotBehaviour() {
             public void action() {
-                Scanner scanner = new Scanner(System.in);
 
                 // Genres to rate
                 String[] genres = {
@@ -62,13 +64,15 @@ public class VisualizerAgent extends Agent {
                     e.printStackTrace();
                 }
             }
-        });
+        }, "GET_INPUT");
 
         // Behavior to receive recommendations
-        addBehaviour(new CyclicBehaviour() {
+        fsm.registerState(new OneShotBehaviour() {
             public void action() {
-                MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
-                ACLMessage reply = receive(mt);
+                // MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+                // ACLMessage reply = receive(mt);
+                ACLMessage reply = blockingReceive(
+                        MessageTemplate.MatchPerformative(ACLMessage.INFORM));
 
                 if (reply != null) {
                     try {
@@ -89,6 +93,9 @@ public class VisualizerAgent extends Agent {
                     block();
                 }
             }
-        });
+        }, "PRINT_RESULTS");
+        fsm.registerDefaultTransition("GET_INPUT", "PRINT_RESULTS");
+        fsm.registerDefaultTransition("PRINT_RESULTS", "GET_INPUT");
+        addBehaviour(fsm);
     }
 }
