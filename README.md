@@ -72,9 +72,9 @@ This will compile and launch the system.
 ## 🔮 Future Improvements
 
 * Improve similarity heuristics (e.g., cosine similarity, machine learning).
-* Permitir al usuario elegir las recomendaciones.
+* Has a cycle interface
 * GUI interface for user interaction.
-* Permitir varios autores.
+* Make an agent more to transform better the data.
 
 ---
 Happy hacking 📚🤖
