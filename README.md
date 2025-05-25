@@ -71,7 +71,6 @@ This will compile and launch the system.
 ## 🔮 Future Improvements
 
 * Improve similarity heuristics (e.g., cosine similarity, machine learning).
-* Select the amount of books.
 * Make an agent more to transform better the data.
 * Show better the data of the book.(Included images...)
 * Save a session of a user and its preferencies.

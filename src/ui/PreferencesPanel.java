@@ -33,7 +33,7 @@ public class PreferencesPanel extends JPanel {
 
         JPanel spinnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         spinnerPanel.add(new JLabel("Número de libros a mostrar:"));
-        numBooksSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 100, 1));
+        numBooksSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 100, 1));
         spinnerPanel.add(numBooksSpinner);
         add(spinnerPanel, BorderLayout.NORTH);
         JButton next = new JButton("Next");
