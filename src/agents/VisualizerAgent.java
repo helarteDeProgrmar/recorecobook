@@ -54,11 +54,12 @@ public class VisualizerAgent extends Agent {
         });
     }
 
-    public void sendPreferencesAndAuthors(Map<String, Integer> prefs, List<String> authors) {
+    public void sendPreferencesAndAuthors(Map<String, Integer> prefs, List<String> authors, int numberBooks) {
+        System.out.println("@@ VisualizerAgent |  Hi from sendPreferences!");
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         msg.addReceiver(new AID("recommender", AID.ISLOCALNAME));
         try {
-            msg.setContentObject(new Object[] { prefs, authors });
+            msg.setContentObject(new Object[] { prefs, authors, numberBooks });
             send(msg);
             System.out.println("Preferences and authors sent to recommender.");
         } catch (IOException e) {

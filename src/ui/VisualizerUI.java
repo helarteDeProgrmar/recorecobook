@@ -54,7 +54,7 @@ public class VisualizerUI extends JFrame {
     public void onAuthorsSubmitted(java.util.List<String> authors) {
         this.authors = authors;
         showLoading();
-        agent.sendPreferencesAndAuthors(preferences, authors);
+        agent.sendPreferencesAndAuthors(preferences, authors, 2);
     }
 
     // Llamado por el agente cuando llegan los resultados

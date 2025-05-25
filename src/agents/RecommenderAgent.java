@@ -14,6 +14,7 @@ import models.Book;
 public class RecommenderAgent extends Agent {
 
     private Map<String, Integer> userPreferences = null;
+    private int userNumberBooks = 5;
     private String visualizerAID = null;
 
     protected void setup() {
@@ -45,6 +46,7 @@ public class RecommenderAgent extends Agent {
                     Object[] content = (Object[]) msg.getContentObject();
                     userPreferences = (Map<String, Integer>) content[0];
                     List<String> authors = (List<String>) content[1];
+                    userNumberBooks = (Integer) content[2];
                     visualizerAID = msg.getSender().getLocalName();
 
                     // Send author to IngestorAgent
@@ -72,7 +74,7 @@ public class RecommenderAgent extends Agent {
                     return;
 
                 List<Book> books = (List<Book>) content;
-                List<Book> topBooks = getTopRecommendations(books, userPreferences, 5);
+                List<Book> topBooks = getTopRecommendations(books, userPreferences, userNumberBooks);
 
                 // Send results to VisualizerAgent
                 ACLMessage reply = new ACLMessage(ACLMessage.INFORM);
