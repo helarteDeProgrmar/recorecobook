@@ -65,10 +65,13 @@ public class GoogleBooksAPI {
 
                             List<String> mappedCategories = new ArrayList<>();
                             JSONArray categoriesJSON = info.optJSONArray("categories");
+                            String mainGenre = null;
                             if (categoriesJSON != null) {
                                 System.out.println("## GoogleBooksAPI | categoria: " + categoriesJSON.toString());
                                 for (int j = 0; j < categoriesJSON.length(); j++) {
                                     String rawCategory = categoriesJSON.getString(j);
+                                    if (mainGenre == null)
+                                        mainGenre = rawCategory;
                                     String translated = translateCategory(rawCategory);
                                     if (translated != null) {
                                         mappedCategories.add(translated);
@@ -77,17 +80,15 @@ public class GoogleBooksAPI {
                             }
 
                             Map<String, Integer> features = normalizeCategories(mappedCategories);
-
-                            String genre = null;
-                            Integer max = 0;
-                            for (Map.Entry<String, Integer> entry : features.entrySet()) {
-                                Integer currentValue = entry.getValue();
-                                if (currentValue > max) {
-                                    genre = entry.getKey();
-                                    max = currentValue;
-                                }
-                            }
-                            books.add(new Book(title, mainAuthor, genre, features));
+                            // Integer max = 0;
+                            // for (Map.Entry<String, Integer> entry : features.entrySet()) {
+                            // Integer currentValue = entry.getValue();
+                            // if (currentValue > max) {
+                            // genre = entry.getKey();
+                            // max = currentValue;
+                            // }
+                            // }
+                            books.add(new Book(title, mainAuthor, mainGenre, features));
                         }
                     }
                 }
