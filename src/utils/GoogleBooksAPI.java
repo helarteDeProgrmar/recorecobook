@@ -17,12 +17,12 @@ public class GoogleBooksAPI {
 
     private static final String GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes";
 
-    public List<Book> searchBooksByAuthor(String author) {
+    public static List<Book> searchBooksByAuthor(String author) {
         System.out.println("** GoogleBooksAPI | Method called");
         return fetchBooks(Collections.singletonList(author));
     }
 
-    public List<Book> fetchBooks(List<String> authors) {
+    public static List<Book> fetchBooks(List<String> authors) {
         List<Book> books = new ArrayList<>();
 
         for (String author : authors) {
@@ -100,7 +100,7 @@ public class GoogleBooksAPI {
         return books;
     }
 
-    private String translateCategory(String rawCategory) {
+    private static String translateCategory(String rawCategory) {
         if (rawCategory == null)
             return null;
 
@@ -129,7 +129,7 @@ public class GoogleBooksAPI {
         return null;
     }
 
-    private Map<String, Integer> normalizeCategories(List<String> inputCategories) {
+    private static Map<String, Integer> normalizeCategories(List<String> inputCategories) {
         List<String> allGenres = Arrays.asList(
                 "action", "fantasy", "romance", "horror",
                 "science_fiction", "drama", "comedy");

@@ -10,14 +10,12 @@ import java.util.List;
 
 import models.Book;
 import utils.GoogleBooksAPI;
+import utils.LocalBooks;
 
 public class IngestorAgent extends Agent {
 
-    private GoogleBooksAPI api;
-
     @Override
     protected void setup() {
-        api = new GoogleBooksAPI();
 
         addBehaviour(new CyclicBehaviour() {
             @Override
@@ -27,9 +25,15 @@ public class IngestorAgent extends Agent {
                     try {
                         Object[] container = (Object[]) msg.getContentObject();
                         List<String> authors = (List<String>) container[0];
-                        System.out.println(authors.toString());
-
-                        List<Book> books = api.fetchBooks(authors);
+                        List<Book> books = null;
+                        if (authors.size() == 0) {
+                            System.out.println("IngestorAgent | Local search: " + authors.toString());
+                            books = LocalBooks.chargeLocalBooks("data/libros.csv");
+                            System.out.println(books.get(0).toString());
+                        } else {
+                            System.out.println("IngestorAgent | Searching: " + authors.toString());
+                            books = GoogleBooksAPI.fetchBooks(authors);
+                        }
 
                         ACLMessage reply = msg.createReply();
                         reply.setPerformative(ACLMessage.INFORM);
