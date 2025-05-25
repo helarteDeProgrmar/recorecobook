@@ -4,3 +4,6 @@
 
 # pesados
 *.txt
+
+# private
+.env
