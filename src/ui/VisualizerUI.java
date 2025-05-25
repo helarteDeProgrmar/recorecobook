@@ -18,6 +18,7 @@ public class VisualizerUI extends JFrame {
 
     private Map<String, Integer> preferences;
     private java.util.List<String> authors;
+    private int numberBooks;
 
     public VisualizerUI(VisualizerAgent agent) {
         super("Book Recommender");
@@ -45,8 +46,9 @@ public class VisualizerUI extends JFrame {
     }
 
     // Llamado por PreferencesPanel
-    public void onPreferencesSubmitted(Map<String, Integer> prefs) {
+    public void onPreferencesSubmitted(Map<String, Integer> prefs, int numberBooks) {
         this.preferences = prefs;
+        this.numberBooks = numberBooks;
         showAuthors();
     }
 
@@ -54,7 +56,7 @@ public class VisualizerUI extends JFrame {
     public void onAuthorsSubmitted(java.util.List<String> authors) {
         this.authors = authors;
         showLoading();
-        agent.sendPreferencesAndAuthors(preferences, authors, 2);
+        agent.sendPreferencesAndAuthors(preferences, authors, numberBooks);
     }
 
     // Llamado por el agente cuando llegan los resultados

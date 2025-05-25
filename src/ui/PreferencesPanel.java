@@ -8,6 +8,7 @@ import java.util.*;
 public class PreferencesPanel extends JPanel {
     private final VisualizerUI ui;
     private final Map<String, JSlider> sliders;
+    private final JSpinner numBooksSpinner;
     private static final String[] GENRES = {
             "action", "fantasy", "romance", "horror",
             "science_fiction", "drama", "comedy"
@@ -30,13 +31,19 @@ public class PreferencesPanel extends JPanel {
         }
         add(sliderPanel, BorderLayout.CENTER);
 
+        JPanel spinnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        spinnerPanel.add(new JLabel("Número de libros a mostrar:"));
+        numBooksSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 100, 1));
+        spinnerPanel.add(numBooksSpinner);
+        add(spinnerPanel, BorderLayout.NORTH);
         JButton next = new JButton("Next");
         next.addActionListener(e -> {
             Map<String, Integer> prefs = new LinkedHashMap<>();
             for (String g : GENRES) {
                 prefs.put(g, sliders.get(g).getValue());
             }
-            ui.onPreferencesSubmitted(prefs);
+            int numberBooks = (Integer) numBooksSpinner.getValue();
+            ui.onPreferencesSubmitted(prefs, numberBooks);
         });
         JPanel btn = new JPanel();
         btn.add(next);
