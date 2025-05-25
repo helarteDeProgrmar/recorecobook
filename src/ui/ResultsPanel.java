@@ -66,7 +66,7 @@ public class ResultsPanel extends JPanel {
     private void exportToCSV() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar como");
-        fileChooser.setSelectedFile(new java.io.File("libros.csv"));
+        fileChooser.setSelectedFile(new java.io.File("recomended_books.csv"));
         int userSelection = fileChooser.showSaveDialog(this);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -82,7 +82,7 @@ public class ResultsPanel extends JPanel {
                 for (int i = 0; i < tableModel.getRowCount(); i++) {
                     for (int j = 0; j < tableModel.getColumnCount(); j++) {
                         Object value = tableModel.getValueAt(i, j);
-                        pw.print("\"" + value.toString().replace("\"", "\"\"") + "\""); // para escapar comillas
+                        pw.print("\"" + value.toString().replace("\"", "\"\"") + "\"");
                         if (j < tableModel.getColumnCount() - 1)
                             pw.print(",");
                     }
