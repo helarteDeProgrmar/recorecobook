@@ -78,7 +78,16 @@ public class GoogleBooksAPI {
 
                             Map<String, Integer> features = normalizeCategories(mappedCategories);
 
-                            books.add(new Book(title, mainAuthor, "implement", features));
+                            String genre = null;
+                            Integer max = 0;
+                            for (Map.Entry<String, Integer> entry : features.entrySet()) {
+                                Integer currentValue = entry.getValue();
+                                if (currentValue > max) {
+                                    genre = entry.getKey();
+                                    max = currentValue;
+                                }
+                            }
+                            books.add(new Book(title, mainAuthor, genre, features));
                         }
                     }
                 }
