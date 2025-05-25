@@ -41,6 +41,9 @@ public class ResultsPanel extends JPanel {
         btn.add(again);
         btn.add(close);
         add(btn, BorderLayout.SOUTH);
+        JButton export = new JButton("Exportar CSV");
+        export.addActionListener(e -> exportToCSV());
+        btn.add(export);
     }
 
     public void updateResults(List<Book> results) {
@@ -59,4 +62,39 @@ public class ResultsPanel extends JPanel {
         }
         return sb.toString().trim();
     }
+
+    private void exportToCSV() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar como");
+        fileChooser.setSelectedFile(new java.io.File("libros.csv"));
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+            try (java.io.PrintWriter pw = new java.io.PrintWriter(fileToSave)) {
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    pw.print(table.getColumnName(i));
+                    if (i < table.getColumnCount() - 1)
+                        pw.print(",");
+                }
+                pw.println();
+
+                for (int i = 0; i < tableModel.getRowCount(); i++) {
+                    for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                        Object value = tableModel.getValueAt(i, j);
+                        pw.print("\"" + value.toString().replace("\"", "\"\"") + "\""); // para escapar comillas
+                        if (j < tableModel.getColumnCount() - 1)
+                            pw.print(",");
+                    }
+                    pw.println();
+                }
+
+                JOptionPane.showMessageDialog(this, "Archivo guardado exitosamente.");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al guardar el archivo.");
+            }
+        }
+    }
+
 }
