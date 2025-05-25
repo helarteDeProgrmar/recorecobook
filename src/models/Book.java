@@ -32,6 +32,16 @@ public class Book implements Serializable {
         return features;
     }
 
+    public int distance(Map<String, Integer> preferences) {
+        int sum = 0;
+        for (String genre : preferences.keySet()) {
+            int preference = preferences.getOrDefault(genre, 0);
+            int bookFeature = features.getOrDefault(genre, 0);
+            sum += Math.abs(preference - bookFeature);
+        }
+        return sum;
+    }
+
     @Override
     public String toString() {
         return String.format(
