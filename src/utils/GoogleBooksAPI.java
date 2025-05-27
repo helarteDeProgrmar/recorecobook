@@ -32,10 +32,9 @@ public class GoogleBooksAPI {
                         + "&langRestrict=es&printType=books&maxResults=40&orderBy=relevance";
 
                 URL url = new URL(urlStr);
-                System.out.println("** GoogleBooksAPI | the url is");
-                System.out.println(url.toString());
-                System.out.println(author);
-                System.out.println("################################");
+                System.out.println("** GoogleBooksAPI | The current author is:" + author);
+                System.out.println("** GoogleBooksAPI | the url is" + url.toString());
+                System.out.println("** GoogleBooksAPI | ################################");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 
@@ -67,7 +66,7 @@ public class GoogleBooksAPI {
                             JSONArray categoriesJSON = info.optJSONArray("categories");
                             String mainGenre = null;
                             if (categoriesJSON != null) {
-                                System.out.println("## GoogleBooksAPI | categoria: " + categoriesJSON.toString());
+                                System.out.println("** GoogleBooksAPI | categoria: " + categoriesJSON.toString());
                                 for (int j = 0; j < categoriesJSON.length(); j++) {
                                     String rawCategory = categoriesJSON.getString(j);
                                     if (mainGenre == null)
@@ -92,6 +91,7 @@ public class GoogleBooksAPI {
                         }
                     }
                 }
+                System.out.println("** GoogleBooksAPI | ################################");
 
             } catch (Exception e) {
                 System.err.println("Error processing author: " + author + " -> " + e.getMessage());
