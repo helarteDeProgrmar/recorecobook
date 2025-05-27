@@ -1,4 +1,4 @@
-titulo,autor,genero_principal,accion,fantasia,romance,terror,ciencia_ficcion,drama,comedia
+titulo,autor,genero_principal,action,fantasy,romance,horror,science_fiction,drama,comedy
 Harry Potter,J.K. Rowling,fantasia,7,10,2,1,3,4,2
 Dune,Frank Herbert,ciencia_ficcion,4,6,1,1,10,5,1
 El Señor de los Anillos,J.R.R. Tolkien,fantasia,6,10,3,1,4,5,2
