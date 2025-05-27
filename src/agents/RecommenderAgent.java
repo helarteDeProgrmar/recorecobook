@@ -18,7 +18,7 @@ public class RecommenderAgent extends Agent {
     private String visualizerAID = null;
 
     protected void setup() {
-        System.out.println("RecommenderAgent started.");
+        System.out.println("## RecommenderAgent | Started");
 
         addBehaviour(new CyclicBehaviour() {
             public void action() {
@@ -53,10 +53,10 @@ public class RecommenderAgent extends Agent {
                     ACLMessage toIngestor = new ACLMessage(ACLMessage.REQUEST);
                     toIngestor.addReceiver(new AID("ingestor", AID.ISLOCALNAME));
                     toIngestor.setContentObject(new Object[] { authors });
-                    System.out.println(authors.toString());
+                    System.out.println("## RecommenderAgent | Receive the authors: " + authors.toString());
+                    System.out.println("## RecommenderAgent | Receive the userPreferences: " + userPreferences.toString());
                     send(toIngestor);
-
-                    System.out.println("Received user preferences and author. Request sent to IngestorAgent.");
+                    System.out.println("## RecommenderAgent | Send authors to ingestor");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -65,10 +65,11 @@ public class RecommenderAgent extends Agent {
 
             private void handleIngestorResponse(ACLMessage msg) throws UnreadableException, IOException {
                 if (userPreferences == null) {
-                    System.out.println("User preferences not initialized.");
+                    System.out.println("## RecommenderAgent | User preferences not initialized:" + userPreferences.toString());
                     return;
                 }
 
+                System.out.println("## RecommenderAgent | Received the content");
                 Object content = msg.getContentObject();
                 if (!(content instanceof List<?>))
                     return;
@@ -81,8 +82,7 @@ public class RecommenderAgent extends Agent {
                 reply.addReceiver(new AID(visualizerAID, AID.ISLOCALNAME));
                 reply.setContentObject((Serializable) topBooks);
                 send(reply);
-
-                System.out.println("Top 5 recommendations sent to VisualizerAgent.");
+                System.out.println("## RecommenderAgent | Top  recommendations sent to VisualizerAgent:"+ topBooks.toString());
             }
         });
     }
