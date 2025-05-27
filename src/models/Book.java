@@ -37,6 +37,10 @@ public class Book implements Serializable {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int distance(Map<String, Integer> preferences) {
         int sum = 0;
         for (String genre : preferences.keySet()) {

@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import models.Book;
+import utils.GoogleBooksAPI;
 
 public class RecommenderAgent extends Agent {
 
@@ -76,6 +77,10 @@ public class RecommenderAgent extends Agent {
 
                 List<Book> books = (List<Book>) content;
                 List<Book> topBooks = getTopRecommendations(books, userPreferences, userNumberBooks);
+                for(Book b: topBooks) {
+                    if (b.getDescription().equals("-"))
+                        b.setDescription(GoogleBooksAPI.getBookDescriptionByTitle(b.getTitle()));
+                }
 
                 // Send results to VisualizerAgent
                 ACLMessage reply = new ACLMessage(ACLMessage.INFORM);

@@ -17,6 +17,44 @@ public class GoogleBooksAPI {
 
     private static final String GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes";
 
+    public static String getBookDescriptionByTitle(String title) {
+        System.out.println("** GoogleBooksAPI | Searching book description for title: " + title);
+        try {
+            String query = URLEncoder.encode(title.toLowerCase().trim(), StandardCharsets.UTF_8.toString());
+            String urlStr = GOOGLE_BOOKS_URL + "?q=intitle:" + query;
+
+            URL url = new URL(urlStr);
+            System.out.println("** GoogleBooksAPI | the url is" + url.toString());
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int status = connection.getResponseCode();
+            if (status != 200) {
+                throw new RuntimeException("HTTP error code: " + status);
+            }
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder jsonResponse = new StringBuilder();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                jsonResponse.append(inputLine);
+            }
+            in.close();
+            connection.disconnect();
+
+            JSONObject responseJson = new JSONObject(jsonResponse.toString());
+            JSONArray items = responseJson.optJSONArray("items");
+            if (items != null && items.length() > 0) {
+                JSONObject volumeInfo = items.getJSONObject(0).getJSONObject("volumeInfo");
+                return volumeInfo.optString("description", "Descripción no disponible.");
+            } else {
+                return "Desciptión no dispoble";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Ocurrió un error al buscar la descripción del libro.";
+        }
+    }
     public static List<Book> searchBooksByAuthor(String author) {
         System.out.println("** GoogleBooksAPI | Method called");
         return fetchBooks(Collections.singletonList(author));
