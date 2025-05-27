@@ -30,11 +30,11 @@ public class IngestorAgent extends Agent {
                         if (authors.size() == 0) {
                             System.out.println("@@ IngestorAgent | Local search: " + authors.toString());
                             books = LocalBooks.chargeLocalBooks("data/libros.csv");
-                            System.out.println("@@ IngestorAgent |" + books.get(0).toString());
+                            System.out.println("@@ IngestorAgent | First book:" + books.get(0).toString());
                         } else {
                             System.out.println("@@ IngestorAgent | Searching: " + authors.toString());
                             books = GoogleBooksAPI.fetchBooks(authors);
-                            System.out.println("@@ IngestorAgent |" + books.get(0).toString());
+                            System.out.println("@@ IngestorAgent | First book:" + books.get(0).toString());
                         }
 
                         ACLMessage reply = msg.createReply();
