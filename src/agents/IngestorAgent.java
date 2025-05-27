@@ -16,6 +16,7 @@ public class IngestorAgent extends Agent {
 
     @Override
     protected void setup() {
+        System.out.println("@@ IngestorAgent | Started" );
 
         addBehaviour(new CyclicBehaviour() {
             @Override
@@ -27,12 +28,13 @@ public class IngestorAgent extends Agent {
                         List<String> authors = (List<String>) container[0];
                         List<Book> books = null;
                         if (authors.size() == 0) {
-                            System.out.println("IngestorAgent | Local search: " + authors.toString());
+                            System.out.println("@@ IngestorAgent | Local search: " + authors.toString());
                             books = LocalBooks.chargeLocalBooks("data/libros.csv");
-                            System.out.println(books.get(0).toString());
+                            System.out.println("@@ IngestorAgent |" + books.get(0).toString());
                         } else {
-                            System.out.println("IngestorAgent | Searching: " + authors.toString());
+                            System.out.println("@@ IngestorAgent | Searching: " + authors.toString());
                             books = GoogleBooksAPI.fetchBooks(authors);
+                            System.out.println("@@ IngestorAgent |" + books.get(0).toString());
                         }
 
                         ACLMessage reply = msg.createReply();
@@ -40,6 +42,7 @@ public class IngestorAgent extends Agent {
                         reply.setContentObject((java.io.Serializable) books);
 
                         myAgent.send(reply);
+                        System.out.println("@@ IngestorAgent | Send books to RecomenenderAgent" );
 
                     } catch (Exception e) {
                         e.printStackTrace();
