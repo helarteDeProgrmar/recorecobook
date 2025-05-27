@@ -16,7 +16,7 @@ public class ResultsPanel extends JPanel {
         this.ui = ui;
         setLayout(new BorderLayout(10, 10));
 
-        String[] columnNames = { "Título", "Autor", "Género", "Características" };
+        String[] columnNames = { "Título", "Autor", "Género", "Descripción", "Características" };
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -50,7 +50,7 @@ public class ResultsPanel extends JPanel {
         tableModel.setRowCount(0);
         for (Book b : results) {
             String features = formatFeatures(b.getFeatures());
-            Object[] row = { b.getTitle(), b.getAuthor(), b.getGenre(), features };
+            Object[] row = { b.getTitle(), b.getAuthor(), b.getGenre(), b.getDescription(), features };
             tableModel.addRow(row);
         }
     }

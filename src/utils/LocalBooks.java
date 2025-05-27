@@ -31,7 +31,7 @@ public class LocalBooks {
                     features.put(heads[i], Integer.parseInt(fields[i]));
                 }
 
-                list.add(new Book(title, author, mainGenre, features));
+                list.add(new Book(title, author, mainGenre, features, "-"));
             }
         } catch (IOException e) {
             e.printStackTrace();
