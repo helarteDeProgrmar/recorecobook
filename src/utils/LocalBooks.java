@@ -7,8 +7,7 @@ import models.Book;
 public class LocalBooks {
 
     public static List<Book> chargeLocalBooks(String path) {
-        System.out.println(path);
-        System.out.println(System.getProperty("user.dir"));
+        System.out.println("%% LocalBooks | Searching in path: " + path);
 
         List<Book> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
