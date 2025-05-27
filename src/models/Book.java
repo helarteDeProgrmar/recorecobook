@@ -8,12 +8,14 @@ public class Book implements Serializable {
     private String author;
     private String genre;
     private Map<String, Integer> features; // Map of genre to score (1–10)
+    private String description;
 
-    public Book(String title, String author, String genre, Map<String, Integer> features) {
+    public Book(String title, String author, String genre, Map<String, Integer> features, String description) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.features = features;
+        this.description = description;
     }
 
     public String getTitle() {
@@ -31,6 +33,9 @@ public class Book implements Serializable {
     public Map<String, Integer> getFeatures() {
         return features;
     }
+    public String getDescription() {
+        return description;
+    }
 
     public int distance(Map<String, Integer> preferences) {
         int sum = 0;
@@ -45,7 +50,7 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         return String.format(
-                "Title: %s | Author: %s | Genre: %s | Features: %s",
-                title, author, genre, features.toString());
+                "Title: %s | Author: %s | Genre: %s | Features: %s | Description: %s",
+                title, author, genre, features.toString(), description);
     }
 }

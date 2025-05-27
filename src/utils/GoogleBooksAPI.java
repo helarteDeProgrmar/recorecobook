@@ -60,7 +60,7 @@ public class GoogleBooksAPI {
                                     ? authorsJSON.getString(0)
                                     : "Unknown Author";
 
-                            String description = info.optString("description", "No description");
+                            String description = info.optString("description", "-");
 
                             List<String> mappedCategories = new ArrayList<>();
                             JSONArray categoriesJSON = info.optJSONArray("categories");
@@ -87,7 +87,7 @@ public class GoogleBooksAPI {
                             // max = currentValue;
                             // }
                             // }
-                            books.add(new Book(title, mainAuthor, mainGenre, features));
+                            books.add(new Book(title, mainAuthor, mainGenre, features, description));
                         }
                     }
                 }
