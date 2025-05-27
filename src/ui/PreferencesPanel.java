@@ -10,8 +10,8 @@ public class PreferencesPanel extends JPanel {
     private final Map<String, JSlider> sliders;
     private final JSpinner numBooksSpinner;
     private static final String[] GENRES = {
-            "action", "fantasy", "romance", "horror",
-            "science_fiction", "drama", "comedy"
+            "Action", "Fantasy", "Romance", "Horror",
+            "Science_fiction", "Drama", "Comedy"
     };
 
     public PreferencesPanel(VisualizerUI ui) {
@@ -21,7 +21,9 @@ public class PreferencesPanel extends JPanel {
         JPanel sliderPanel = new JPanel(new GridLayout(GENRES.length, 2, 5, 5));
         sliders = new LinkedHashMap<>();
         for (String genre : GENRES) {
-            sliderPanel.add(new JLabel(genre));
+        	JLabel label = new JLabel(genre);
+        	label.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 10)); // margen izquierdo y derecho
+        	sliderPanel.add(label);
             JSlider s = new JSlider(1, 10, 5);
             s.setMajorTickSpacing(1);
             s.setPaintTicks(true);
