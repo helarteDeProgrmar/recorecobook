@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import utils.HeaderImage;
 
 public class AuthorsPanel extends JPanel {
     private final VisualizerUI ui;
@@ -13,13 +14,21 @@ public class AuthorsPanel extends JPanel {
 
     public AuthorsPanel(VisualizerUI ui) {
         this.ui = ui;
-        setLayout(new BorderLayout(10, 10));
+
+        // Estructura: imagen arriba + contenido normal debajo
+        setLayout(new BorderLayout());
+
+        // Cabecera con imagen
+        add(HeaderImage.buildHeaderImage(), BorderLayout.NORTH);
+
+        // Contenido principal en panel anidado
+        JPanel content = new JPanel(new BorderLayout(10, 10));
 
         listModel = new DefaultListModel<>();
         list = new JList<>(listModel);
-        add(new JScrollPane(list), BorderLayout.CENTER);
+        content.add(new JScrollPane(list), BorderLayout.CENTER);
 
-        // 🔹 Panel superior: campo + botón + mensaje
+        // Panel superior: campo + botón + mensaje
         JPanel top = new JPanel(new BorderLayout(5, 5));
         inputField = new JTextField();
         JButton add = new JButton("Añadir Autor");
@@ -35,9 +44,9 @@ public class AuthorsPanel extends JPanel {
         top.add(inputField, BorderLayout.CENTER);
         top.add(add, BorderLayout.EAST);
 
-        // 🔸 Mensaje informativo
+        // Mensaje informativo
         JLabel infoLabel = new JLabel(
-                "<html><i>💡 Si no introduces autores, se realizará una búsqueda local con el archivo CSV.</i></html>");
+            "<html><i>💡 Si no introduces autores, se realizará una búsqueda local con el archivo CSV.</i></html>");
         infoLabel.setForeground(new Color(70, 70, 70));
         infoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
@@ -45,9 +54,9 @@ public class AuthorsPanel extends JPanel {
         headerPanel.add(top, BorderLayout.NORTH);
         headerPanel.add(infoLabel, BorderLayout.SOUTH);
 
-        add(headerPanel, BorderLayout.NORTH);
+        content.add(headerPanel, BorderLayout.NORTH);
 
-        // 🔹 Botón inferior
+        // Botón inferior
         JButton next = new JButton("Siguiente");
         next.addActionListener(e -> {
             java.util.List<String> authors = Collections.list(listModel.elements());
@@ -55,7 +64,9 @@ public class AuthorsPanel extends JPanel {
         });
         JPanel btn = new JPanel();
         btn.add(next);
-        add(btn, BorderLayout.SOUTH);
+        content.add(btn, BorderLayout.SOUTH);
+
+        add(content, BorderLayout.CENTER);
     }
 
     public void reset() {

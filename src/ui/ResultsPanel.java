@@ -6,6 +6,8 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 import models.Book;
+import utils.HeaderImage;
+
 
 public class ResultsPanel extends JPanel {
     private final VisualizerUI ui;
@@ -15,6 +17,7 @@ public class ResultsPanel extends JPanel {
     public ResultsPanel(VisualizerUI ui) {
         this.ui = ui;
         setLayout(new BorderLayout(10, 10));
+        add(utils.HeaderImage.buildHeaderImage(), BorderLayout.NORTH);
 
         String[] columnNames = { "Título", "Autor", "Género", "Descripción", "Características" };
         tableModel = new DefaultTableModel(columnNames, 0) {
@@ -24,7 +27,13 @@ public class ResultsPanel extends JPanel {
             }
         };
 
-        table = new JTable(tableModel);
+        table = new JTable(tableModel) {
+            @Override
+            public TableCellRenderer getCellRenderer(int row, int column) {
+                return new TooltipCellRenderer();
+            }
+        };
+
         table.setFillsViewportHeight(true);
         table.setRowHeight(30);
         table.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -37,20 +46,27 @@ public class ResultsPanel extends JPanel {
         again.addActionListener(e -> ui.restart());
         JButton close = new JButton("Cerrar");
         close.addActionListener(e -> ui.close());
+        JButton export = new JButton("Exportar CSV");
+        export.addActionListener(e -> exportToCSV());
+
         JPanel btn = new JPanel();
         btn.add(again);
         btn.add(close);
-        add(btn, BorderLayout.SOUTH);
-        JButton export = new JButton("Exportar CSV");
-        export.addActionListener(e -> exportToCSV());
         btn.add(export);
+        add(btn, BorderLayout.SOUTH);
     }
 
     public void updateResults(List<Book> results) {
         tableModel.setRowCount(0);
         for (Book b : results) {
             String features = formatFeatures(b.getFeatures());
-            Object[] row = { b.getTitle(), b.getAuthor(), b.getGenre(), b.getDescription(), features };
+            Object[] row = {
+                b.getTitle(),
+                b.getAuthor(),
+                b.getGenre(),
+                b.getDescription(),
+                features
+            };
             tableModel.addRow(row);
         }
     }
@@ -61,6 +77,26 @@ public class ResultsPanel extends JPanel {
             sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("  ");
         }
         return sb.toString().trim();
+    }
+
+    private String elideText(String text, int maxLength) {
+        return text.length() > maxLength ? text.substring(0, maxLength - 3) + "..." : text;
+    }
+
+    private String makeScrollableTooltip(String text) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><div style='max-height:200px; width:400px; overflow-y:auto;'>");
+
+        int lineLength = 80;
+        int i = 0;
+        while (i < text.length()) {
+            int end = Math.min(i + lineLength, text.length());
+            sb.append(text, i, end).append("<br>");
+            i = end;
+        }
+
+        sb.append("</div></html>");
+        return sb.toString();
     }
 
     private void exportToCSV() {
@@ -97,4 +133,18 @@ public class ResultsPanel extends JPanel {
         }
     }
 
+    // 🔹 Renderer común con tooltip multilínea para todas las celdas
+    private class TooltipCellRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+
+            JLabel label = (JLabel) super.getTableCellRendererComponent(
+                table, elideText(value.toString(), 80), isSelected, hasFocus, row, column);
+
+            label.setToolTipText(makeScrollableTooltip(value.toString()));
+            label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            return label;
+        }
+    }
 }
