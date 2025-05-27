@@ -22,13 +22,12 @@ public class VisualizerAgent extends Agent {
     private VisualizerUI ui;
 
     protected void setup() {
-        System.out.println("VisualizerAgent started.");
+        System.out.println("&& VisualizerAgent | Started");
         SwingUtilities.invokeLater(() -> {
             ui = new VisualizerUI(this);
             ui.setVisible(true);
         });
 
-        // 2) Comportamiento permanente para recibir recomendaciones
         addBehaviour(new CyclicBehaviour() {
             private MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
 
@@ -55,13 +54,13 @@ public class VisualizerAgent extends Agent {
     }
 
     public void sendPreferencesAndAuthors(Map<String, Integer> prefs, List<String> authors, int numberBooks) {
-        System.out.println("@@ VisualizerAgent |  Hi from sendPreferences!");
+        System.out.println("&& VisualizerAgent |  Hi from sendPreferences!");
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         msg.addReceiver(new AID("recommender", AID.ISLOCALNAME));
         try {
             msg.setContentObject(new Object[] { prefs, authors, numberBooks });
             send(msg);
-            System.out.println("Preferences and authors sent to recommender.");
+            System.out.println("&& VisualizerAgent | Preferences and authors sent to recommender.");
         } catch (IOException e) {
             e.printStackTrace();
         }
