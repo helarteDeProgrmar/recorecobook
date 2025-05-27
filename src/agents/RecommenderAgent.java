@@ -76,10 +76,16 @@ public class RecommenderAgent extends Agent {
                     return;
 
                 List<Book> books = (List<Book>) content;
-                List<Book> topBooks = getTopRecommendations(books, userPreferences, userNumberBooks);
+                // List<Book> topBooks = getTopRecommendations(books, userPreferences, userNumberBooks);
+                List<Book> topBooks = books.stream()
+                .sorted(Comparator.comparingInt(b -> b.distance(userPreferences)))
+                .limit(userNumberBooks)
+                .toList();
+                System.out.println("## RecommenderAgent | Top  recommendations sent to VisualizerAgent:"+ topBooks.toString());
                 for(Book b: topBooks) {
                     if (b.getDescription().equals("-"))
                         b.setDescription(GoogleBooksAPI.getBookDescriptionByTitle(b.getTitle()));
+                        System.out.println("## RecommenderAgent | Distance beetwen preference and tops:"+ b.distance(userPreferences));
                 }
 
                 // Send results to VisualizerAgent
@@ -87,7 +93,6 @@ public class RecommenderAgent extends Agent {
                 reply.addReceiver(new AID(visualizerAID, AID.ISLOCALNAME));
                 reply.setContentObject((Serializable) topBooks);
                 send(reply);
-                System.out.println("## RecommenderAgent | Top  recommendations sent to VisualizerAgent:"+ topBooks.toString());
             }
         });
     }

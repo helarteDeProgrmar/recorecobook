@@ -48,6 +48,8 @@ public class Book implements Serializable {
             int bookFeature = features.getOrDefault(genre, 0);
             sum += Math.abs(preference - bookFeature);
         }
+        System.out.println("$$ Book | Genres: " + preferences.keySet());
+        System.out.println("$$ Book | Distance from book: " + this.title + " is -> " + sum);
         return sum;
     }
 
