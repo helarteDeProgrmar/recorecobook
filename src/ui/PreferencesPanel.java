@@ -36,7 +36,7 @@ public class PreferencesPanel extends JPanel {
         numBooksSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 100, 1));
         spinnerPanel.add(numBooksSpinner);
         add(spinnerPanel, BorderLayout.NORTH);
-        JButton next = new JButton("Next");
+        JButton next = new JButton("Siguiente");
         next.addActionListener(e -> {
             Map<String, Integer> prefs = new LinkedHashMap<>();
             for (String g : GENRES) {
