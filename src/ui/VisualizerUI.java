@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import agents.VisualizerAgent;
 import models.Book;
+import utils.HeaderImage;
+
 
 public class VisualizerUI extends JFrame {
     private final VisualizerAgent agent;
@@ -25,7 +27,7 @@ public class VisualizerUI extends JFrame {
         this.agent = agent;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(800, 550);
         setLocationRelativeTo(null);
 
         cardLayout = new CardLayout();

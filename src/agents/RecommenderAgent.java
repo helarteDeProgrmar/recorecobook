@@ -93,6 +93,8 @@ public class RecommenderAgent extends Agent {
                 reply.addReceiver(new AID(visualizerAID, AID.ISLOCALNAME));
                 reply.setContentObject((Serializable) topBooks);
                 send(reply);
+
+                System.out.println("## RecommenderAgent | Top  recommendations sent to VisualizerAgent:"+ topBooks.toString());
             }
         });
     }
