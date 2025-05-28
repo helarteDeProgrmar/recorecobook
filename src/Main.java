@@ -33,6 +33,13 @@ public class Main {
                     null);
             recommender.start();
 
+            // Launch TransformerAgent
+            AgentController transformer = cc.createNewAgent(
+                    "transformer",
+                    "agents.TransformerAgent",
+                    null);
+            transformer.start();
+
             // Launch IngestorAgent
             AgentController ingestor = cc.createNewAgent(
                     "ingestor",
