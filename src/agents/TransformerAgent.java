@@ -88,7 +88,8 @@ public class TransformerAgent extends Agent {
 
                 if (keywords.contains(word)) {
                     int currentScore = features.getOrDefault(genre, 0);
-                    features.put(genre, Math.min(10, currentScore + 1));
+                    features.put(genre, Math.min(10, currentScore + 2));
+                    System.out.println("** TransformerAgent | Added score to: " + book.getTitle() + ". The keyword is: " + word);
                 }
             }
         }
