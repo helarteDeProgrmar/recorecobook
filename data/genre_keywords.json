@@ -1,0 +1,9 @@
+{
+  "action": ["batalla", "lucha", "explosión", "guerra", "arma", "soldado"],
+  "fantasy": ["dragón", "magia", "hechicero", "reino", "hechizo", "elfo"],
+  "romance": ["amor", "beso", "romántico", "corazón", "relación"],
+  "horror": ["fantasma", "embrujado", "sangre", "grito", "terror", "monstruo"],
+  "science_fiction": ["robot", "extraterrestre", "espacio", "futuro", "tecnología"],
+  "drama": ["familia", "tragedia", "vida", "conflicto", "emocional"],
+  "comedy": ["gracioso", "broma", "risa", "humor", "cómico"]
+}
