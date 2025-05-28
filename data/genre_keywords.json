@@ -1,9 +1,45 @@
 {
-  "action": ["batalla", "lucha", "explosión", "guerra", "arma", "soldado"],
-  "fantasy": ["dragón", "magia", "hechicero", "reino", "hechizo", "elfo"],
-  "romance": ["amor", "beso", "romántico", "corazón", "relación"],
-  "horror": ["fantasma", "embrujado", "sangre", "grito", "terror", "monstruo"],
-  "science_fiction": ["robot", "extraterrestre", "espacio", "futuro", "tecnología"],
-  "drama": ["familia", "tragedia", "vida", "conflicto", "emocional"],
-  "comedy": ["gracioso", "broma", "risa", "humor", "cómico"]
+  "action": [
+    "batalla", "lucha", "disparo", "persecución", "explosión", "guerra", "soldado",
+    "combate", "arma", "misión", "conflicto", "enemigo", "rescate", "asedio",
+    "tiroteo", "peleas", "asediar", "frente", "asediado", "táctica", "estrategia",
+    "fuego", "ataque", "violencia", "militar", "fuerzas", "conquista"
+  ],
+  "fantasy": [
+    "dragón", "hechizo", "mago", "reino", "encantamiento", "elfo", "espada mágica",
+    "poción", "criatura", "aventura", "leyenda", "hada", "castillo", "profecía",
+    "orco", "gigante", "druida", "hechicero", "misterio", "dimensión", "portal",
+    "reliquia", "reencarnación", "brujería", "conjuro", "runas", "universo"
+  ],
+  "romance": [
+    "amor", "beso", "romántico", "relación", "pareja", "sentimiento", "novio",
+    "novia", "pasión", "corazón", "amistad", "compañía", "abrazo", "ternura",
+    "mirada", "declaración", "cariño", "enamorados", "romance", "ruptura",
+    "confesión", "boda", "sentimientos", "celos", "citas", "pasional"
+  ],
+  "horror": [
+    "miedo", "terror", "grito", "sangre", "espíritu", "fantasma", "oscuro",
+    "noche", "maldición", "asesinato", "criatura", "diablo", "pesadilla", "poseído",
+    "muerto", "demonio", "crujido", "siniestro", "macabro", "escalofrío", "tumba",
+    "cadáver", "pánico", "huesos", "invocación", "ritual", "sepulcro"
+  ],
+  "science_fiction": [
+    "robot", "espacio", "futuro", "tecnología", "alienígena", "galaxia", "nave",
+    "exploración", "tiempo", "dimensión", "clon", "inteligencia artificial", "cyborg",
+    "terraformación", "universo", "láser", "ciencia", "planeta", "distopía",
+    "extraterrestre", "simulación", "viaje temporal", "biotecnología", "futurista"
+  ],
+  "drama": [
+    "familia", "conflicto", "vida", "emocional", "pérdida", "problema", "decisión",
+    "relaciones", "enfermedad", "sufrimiento", "dolor", "redención", "silencio",
+    "sacrificio", "culpa", "verdad", "superación", "realidad", "despedida", "soledad",
+    "pasado", "trauma", "experiencia", "injusticia", "juicio", "responsabilidad"
+  ],
+  "comedy": [
+    "risa", "divertido", "chiste", "humor", "gracioso", "ocurrencia", "broma",
+    "payaso", "situación absurda", "parodia", "sarcasmo", "torpeza", "equívoco",
+    "alocado", "ridículo", "alegría", "exageración", "engaño", "gags", "anécdota",
+    "comedia", "burlas", "ligereza", "ironía", "estupidez", "caricatura"
+  ]
 }
+
