@@ -11,8 +11,8 @@ public class PreferencesPanel extends JPanel {
     private final Map<String, JSlider> sliders;
     private final JSpinner numBooksSpinner;
     private static final String[] GENRES = {
-        "Action", "Fantasy", "Romance", "Horror",
-        "Science_fiction", "Drama", "Comedy"
+        "action", "fantasy", "romance", "horror",
+        "science_fiction", "drama", "comedy"
     };
 
     public PreferencesPanel(VisualizerUI ui) {
