@@ -5,6 +5,8 @@ in Java using the JADE framework.
 
 ## 🚀 How to Run
 
+The current stable version is: `v0.5`
+
 ### Dependencies
 
 Install the json library and the jade library:
