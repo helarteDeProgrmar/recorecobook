@@ -27,6 +27,56 @@ If you use linux, use the provided script:
 
 This will compile and launch the system.
 
+## 🤝 How to Contribute
+
+Thank you for your interest in contributing to RecoRecoBook! To ensure effective collaboration, please follow these standard steps:
+
+### 1. Fork the Repository
+
+Go to the repository page and click Fork to create a copy under your GitHub account.
+
+### 2. Clone Your Fork
+
+```bash
+git clone https://github.com/your-username/RecoRecoBook.git
+cd RecoRecoBook
+```
+
+### 3. Create a Branch from develop
+
+Before starting your work, make sure you are working from the develop branch:
+
+```bash
+git checkout develop
+git pull origin develop
+git checkout -b your-feature-branch
+```
+
+### 4. Make Your Changes
+
+Work on your feature branch. Make sure to:
+
+- Keep your code clean and consistent.
+- Test your changes thoroughly.
+- Add comments where necessary.
+
+### 5. Open a Pull Request
+
+Go to your repository on GitHub and click Compare & pull request.
+Make sure that:
+
+- The PR targets the develop branch.
+- You include a clear and concise description of your changes.
+
+### 7. Wait for Review
+
+Your pull request will be reviewed. You may be asked to make some changes
+before it is merged.
+
+## ⚖️ License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
 ## 🧠 Agents Overview
 
 The system consists of three agents:
