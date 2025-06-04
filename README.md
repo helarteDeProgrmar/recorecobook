@@ -1,38 +1,7 @@
-# Book Recommender System (JADE)
+# RecoRecoBook (RRB)
 
-This project is a multi-agent system for book recommendation implemented
+RecoRecoBook is a multi-agent system for book recommendation implemented
 in Java using the JADE framework.
-
-## 🧠 Agents Overview
-
-The system consists of three agents:
-
-- **VisualizerAgent**: Interacts with the user via console. Collects preferences
-and selected author.
-- **RecommenderAgent**: Receives user preferences, communicates with the Ingestor
-to fetch books, applies a similarity heuristic, and sends back top recommendations.
-- **IngestorAgent**: Agent that take books written by an author with Google Books API.
-
-## 📁 Project Structure
-
-```txt
-├── lib/
-│   ├── jade.jar
-│   └── json-\*.jar
-├── src/
-│   ├── Main.java
-│   ├── agents/
-│   │   ├── VisualizerAgent.java
-│   │   ├── RecommenderAgent.java
-│   │   └── IngestorAgent.java
-│   ├── models/
-│   │   └── Book.java
-│   └── utils/
-│       └── GoogleBooksAPI.java
-├── out/  ← compiled .class files
-├── compile.sh  ← build & run script
-
-````
 
 ## 🚀 How to Run
 
@@ -47,7 +16,10 @@ Put it in the `lib/`
 
 1. Make sure you have Java 11+ installed.
 2. Place `jade.jar` and `json-*.jar` in the `lib/` directory.
-3. Use the provided script:
+3. Verify you have the `Cabecera.png` beetwen the binary files.
+
+If you use an IDE, run from the Main class.
+If you use linux, use the provided script:
 
 ```bash
 ./compile.sh
@@ -55,11 +27,61 @@ Put it in the `lib/`
 
 This will compile and launch the system.
 
+## 🧠 Agents Overview
+
+The system consists of three agents:
+
+- **VisualizerAgent**: Interacts with the user. Collects preferences
+selected authors and number of books.
+- **RecommenderAgent**: Receives user preferences. communicates with the Ingestor.
+Calculate the best books by user preferences.
+- **IngestorAgent**: Manage local or external source of books. Agent that take books.
+- **TransformerAgent**: Agent that tranform the data from the Google API Books to our
+model.
+
+## 📁 Project Structure
+
+```txt
+├── README.md
+├── compile.sh
+├── data
+│   ├── genre_keywords.json
+│   └── libros.csv
+├── lib
+│   ├── jade.jar
+│   └── json-20210307.jar
+├── out
+│   └── (compiled .class)
+└── src
+    ├── Main.java
+    ├── Media
+    │   └── Cabecera.png
+    ├── agents
+    │   ├── IngestorAgent.java
+    │   ├── RecommenderAgent.java
+    │   ├── TransformerAgent.java
+    │   └── VisualizerAgent.java
+    ├── models
+    │   └── Book.java
+    ├── ui
+    │   ├── AuthorsPanel.java
+    │   ├── LoadingPanel.java
+    │   ├── PreferencesPanel.java
+    │   ├── ResultsPanel.java
+    │   └── VisualizerUI.java
+    └── utils
+        ├── GoogleBooksAPI.java
+        ├── HeaderImage.java
+        ├── KeywordLoader.java
+        └── LocalBooks.java
+````
+
+
 ## 🧪 Features
 
-* Collects user preferences on genres via console.
-* Fetches books for a given author.
-* Applies a simple heuristic to recommend top 5 most relevant books.
+* Collects user preferences on genres via ui.
+* Fetches books localy or in the Google API by authors.
+* Applies a simple heuristic to recommend top `n` most relevant books.
 * Uses JADE for agent communication and behavior control.
 
 ## 🔧 Requirements
@@ -71,7 +93,6 @@ This will compile and launch the system.
 ## 🔮 Future Improvements
 
 * Improve similarity heuristics (e.g., cosine similarity, machine learning).
-* Make an agent more to transform better the data.
 * Show better the data of the book.(Included images...)
 * Save a session of a user and its preferencies.
 * Dinamic filters when the user is watch the results.
